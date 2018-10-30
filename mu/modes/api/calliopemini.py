@@ -1,5 +1,5 @@
 """
-Contains definitions for the MicroPython micro:bit related APIs so they can be
+Contains definitions for the MicroPython Calliope mini related APIs so they can be
 used in the editor for autocomplete and call tips.
 
 Copyright (c) 2015-2017 Nicholas H.Tollervey and others (see the AUTHORS file).
@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-MICROBIT_APIS = [
+CALLIOPEMINI_APIS = [
     # RNG
     _("random.getrandbits(n) \nReturn an integer with n random bits."),
     _("random.seed(n) \nInitialise the random number generator with a known integer 'n'."),
@@ -41,18 +41,10 @@ MICROBIT_APIS = [
     _("sys.byteorder"),
     _("sys.print_exception(ex) \nPrint to the REPL information about the exception 'ex'."),
     # System state objects.
-    _("microbit.panic() \nPut micro:bit in panic() mode and display an unhappy face.\nPress the reset button to exit panic() mode."),
-    _("microbit.sleep(time) \nPut micro:bit to sleep for some milliseconds (1 second = 1000 ms) of time.\nsleep(2000) gives micro:bit a 2 second nap."),
-    _("microbit.running_time() \nReturn running_time() in milliseconds since micro:bit's last reset."),
-    _("microbit.temperature() \nReturn micro:bit's temperature in degrees Celcius."),
-    # Accelerometer 3D orientation
-    _("microbit.accelerometer.get_x() \nReturn micro:bit's tilt (X acceleration) in milli-g's."),
-    _("microbit.accelerometer.get_y() \nReturn micro:bit's tilt (Y acceleration) in milli-g's."),
-    _("microbit.accelerometer.get_z() \nReturn micro:bit's up-down motion (Z acceleration) in milli-g's.\nZ is a positive number when moving up. Moving down, Z is a negative number."),
-    _("microbit.accelerometer.is_gesture(name) \nReturn True or False to indicate if the named gesture is currently active.\nMicroPython understands the following gestures: 'up', 'down', 'left', 'right',\n'face up', 'face down', 'freefall', '3g', '6g', '8g' and 'shake'."),
-    _("microbit.accelerometer.was_gesture(name) \nReturn True or False to indicate if the named gesture was active since the\nlast call.\nMicroPython understands the following gestures: 'up', 'down', 'left', 'right',\n'face up', 'face down', 'freefall', '3g', '6g', '8g' and 'shake'."),
-    _("microbit.accelerometer.get_gestures() \nReturn a list indicating the gesture history. The most recent gesture is last.\nCalling this method also clears the gesture history.\nMicroPython understands the following gestures: 'up', 'down', 'left', 'right',\n'face up', 'face down', 'freefall', '3g', '6g', '8g' and 'shake'."),
-    _("microbit.accelerometer.get_values() \nGet the acceleration measurements in all axes at once, as a three-element tuple of integers ordered as X, Y, Z."),
+    _("microbit.panic() \nPut Calliope mini in panic() mode and display an unhappy face.\nPress the reset button to exit panic() mode."),
+    _("microbit.sleep(time) \nPut Calliope mini to sleep for some milliseconds (1 second = 1000 ms) of time.\nsleep(2000) gives Calliope mini a 2 second nap."),
+    _("microbit.running_time() \nReturn running_time() in milliseconds since Calliope mini's last reset."),
+    _("microbit.temperature() \nReturn Calliope mini's temperature in degrees Celcius."),
     # Pushbutton
     _("microbit.button_a.is_pressed() \nIf button A is pressed down, is_pressed() is True, else False."),
     _("microbit.button_a.was_pressed() \nUse was_pressed() to learn if button A was pressed since the last time\nwas_pressed() was called. Returns True or False."),
@@ -60,40 +52,31 @@ MICROBIT_APIS = [
     _("microbit.button_b.is_pressed() \nIf button B is pressed down, is_pressed() is True, else False."),
     _("microbit.button_b.was_pressed() \nUse was_pressed() to learn if button B was pressed since the last time\nwas_pressed() was called. Returns True or False."),
     _("microbit.button_b.get_presses() \nUse get_presses() to get the running total of button presses, and also\nreset this counter to zero."),
-    # Compass 3D direction heading
-    _("microbit.compass.is_calibrated() \nIf micro:bit's compass is_calibrated() and adjusted for accuracy, return True.\nIf compass hasn't been adjusted for accuracy, return False."),
-    _("microbit.compass.calibrate() \nIf micro:bit is confused, calibrate() the compass to adjust the its accuracy.\nWill ask you to rotate the device to draw a circle on the display. Afterwards, micro:bit will know which way is north."),
-    _("microbit.compass.clear_calibration() \nReset micro:bit's compass using clear_calibration() command.\nRun calibrate() to improve accuracy."),
-    _("microbit.compass.get_x() \nReturn magnetic field detected along micro:bit's X axis.\nUsually, the compass returns the earth's magnetic field in micro-Tesla units.\nUnless...a strong magnet is nearby!"),
-    _("microbit.compass.get_y() \nReturn magnetic field detected along micro:bit's Y axis.\nUsually, the compass returns the earth's magnetic field in micro-Tesla units.\nUnless...a strong magnet is nearby!"),
-    _("microbit.compass.get_z() \nReturn magnetic field detected along micro:bit's Z axis.\nUsually, the compass returns the earth's magnetic field in micro-Tesla units.\nUnless...a strong magnet is nearby!"),
-    _("microbit.compass.get_field_strength() \nReturn strength of magnetic field around micro:bit."),
-    _("microbit.compass.heading() \nReturn a number between 0-360 indicating the device's heading. 0 is north."),
     # Sensor API
-    _("sensor.get_acc_x() \nReturn calliopes tilt (X accerleration) in milli-g's"),
-    _("sensor.get_acc_y() \nReturn calliopes tilt (Y accerleration) in milli-g's"),
-    _("sensor.get_acc_z() \nReturn calliopes tilt (Z accerleration) in milli-g's"),
-    _("sensor.get_acc_values() \nGet the acceleration measurements in all axes at once, as a three-element tuple of integers ordered as X, Y, Z."),
-    _("sensor.get_temperature() \nReturn calliopes temperature in degrees Celcius"),
-    _("sensor.get_gyro_x() \nReturn calliopes orientation (x axis)"),
-    _("sensor.get_gyro_y() \nReturn calliopes orientation (y axis)"),
-    _("sensor.get_gyro_z() \nReturn calliopes orientation (z axis)"),
+    _("sensor.get_acc_x() \nReturn Calliope minis tilt (X accerleration) in milli-g's"),
+    _("sensor.get_acc_y() \nReturn Calliope minis tilt (Y accerleration) in milli-g's"),
+    _("sensor.get_acc_z() \nReturn Calliope minis tilt (Z accerleration) in milli-g's"),
+    _("sensor.get_acc_values() \nGet the acceleration measurements in all axes at once, as a three-element tuple of integers ordered as X, Y, Z"),
+    _("sensor.get_temperature() \nReturn Calliope minis temperature in degrees Celcius"),
+    _("sensor.get_gyro_x() \nReturn Calliope minis orientation (x axis)"),
+    _("sensor.get_gyro_y() \nReturn Calliope mini orientation (y axis)"),
+    _("sensor.get_gyro_z() \nReturn Calliope mini orientation (z axis)"),
     _("sensor.get_gyro_values() \nGet the gyrometer measurement in all axes at once"),
-    _("sensor.get_mag_x() \nReturn calliopes magnetic field (x axis)"),
-    _("sensor.get_mag_y() \nReturn calliopes magnetic field (y axis)"),
-    _("sensor.get_mag_z() \nReturn calliopes magnetic field (z axis)"),
-    _("sensor.get_mag_values() \nReturn calliopes magnetic field in all axes at once"),
+    _("sensor.get_mag_x() \nReturn Calliope minis magnetic field (x axis)"),
+    _("sensor.get_mag_y() \nReturn Calliope minis magnetic field (y axis)"),
+    _("sensor.get_mag_z() \nReturn Calliope minis magnetic field (z axis)"),
+    _("sensor.get_mag_values() \nReturn Calliope minis magnetic field in all axes at once"),
     # Display 5x5 LED grid
     _("microbit.display.show(x, delay=400, wait=True, loop=False, clear=False) \nUse show(x) to print the string or image 'x' to the display. If 'x' is a list\nof images they will be animated together.\nUse 'delay' to specify the speed of frame changes in milliseconds.\nIf wait is False animation will happen in the background while the program continues.\nIf loop is True the animation will repeat forever.\nIf clear is True the display will clear at the end of the animation."),
     _("microbit.display.scroll(string, delay=150, wait=True, loop=False, monospace=False) \nUse scroll(string) to scroll the string across the display.\nUse delay to control how fast the text scrolls.\nIf wait is False the text will scroll in the background while the program continues.\nIf loop is True the text will repeat forever.\nIf monospace is True the characters will always take up 5 pixel-columns."),
-    _("microbit.display.clear() \nUse clear() to clear micro:bit's display."),
+    _("microbit.display.clear() \nUse clear() to clear Calliope mini's display."),
     _("microbit.display.get_pixel(x, y) \nUse get_pixel(x, y) to return the display's brightness at LED pixel (x,y).\nBrightness can be from 0 (LED is off) to 9 (maximum LED brightness)."),
     _("microbit.display.set_pixel(x, y, b) \nUse set_pixel(x, y, b) to set the display at LED pixel (x,y) to brightness 'b'\nwhich can be set between 0 (off) to 9 (full brightness)."),
     _("microbit.display.on() \nUse on() to turn on the display."),
     _("microbit.display.off() \nUse off() to turn off the display."),
-    _("microbit.display.is_on() \nUse is_on() to query if the micro:bit's display is on (True) or off (False)."),
+    _("microbit.display.is_on() \nUse is_on() to query if the Calliope mini's display is on (True) or off (False)."),
     # Pins
-    _("microbit.pin0.is_touched() \nIf pin0 is_touched() on micro:bit, return True. If nothing is touching the\npin, return False."),
+    _("microbit.pin0.is_touched() \nIf pin0 is_touched() on Calliope mini, return True. If nothing is touching the\npin, return False."),
     _("microbit.pin0.read_digital() \nread_digital() value from pin0. The reading will be either 0 (lo) or 1 (hi)."),
     _("microbit.pin0.write_digital(value) \nSet pin0 to output high if value is 1, or to low, it it is 0."),
     _("microbit.pin0.read_analog() \nRead the voltage applied to pin0. Return the reading as a number between\n0 (meaning 0v) and 1023 (meaning 3.3v)."),
@@ -101,7 +84,7 @@ MICROBIT_APIS = [
     _("microbit.pin0.set_analog_period(period) \nSet the period of the PWM signal output to period milliseconds."),
     _("microbit.pin0.set_analog_period_microseconds(period) \nSet the period of the PWM signal output to period microseconds."),
 
-    _("microbit.pin1.is_touched() \nIf pin1 is_touched() on micro:bit, return True. If nothing is touching the\npin, return False."),
+    _("microbit.pin1.is_touched() \nIf pin1 is_touched() on Calliope mini, return True. If nothing is touching the\npin, return False."),
     _("microbit.pin1.read_digital() \nread_digital() value from pin1. The reading will be either 0 (lo) or 1 (hi)."),
     _("microbit.pin1.write_digital(value) \nSet pin1 to output high if value is 1, or to low, it it is 0."),
     _("microbit.pin1.read_analog() \nRead the voltage applied to pin1. Return the reading as a number between\n0 (meaning 0v) and 1023 (meaning 3.3v)."),
@@ -109,7 +92,7 @@ MICROBIT_APIS = [
     _("microbit.pin1.set_analog_period(period) \nSet the period of the PWM signal output to period milliseconds."),
     _("microbit.pin1.set_analog_period_microseconds(period) \nSet the period of the PWM signal output to period microseconds."),
 
-    _("microbit.pin2.is_touched() \nIf pin2 is_touched() on micro:bit, return True. If nothing is touching the\npin, return False."),
+    _("microbit.pin2.is_touched() \nIf pin2 is_touched() on Calliope mini, return True. If nothing is touching the\npin, return False."),
     _("microbit.pin2.read_digital() \nread_digital() value from pin2. The reading will be either 0 (lo) or 1 (hi)."),
     _("microbit.pin2.write_digital(value) \nSet pin2 to output high if value is 1, or to low, it it is 0."),
     _("microbit.pin2.read_analog() \nRead the voltage applied to pin2. Return the reading as a number between\n0 (meaning 0v) and 1023 (meaning 3.3v)."),
@@ -176,7 +159,7 @@ MICROBIT_APIS = [
 
     _("microbit.pin20.read_digital() \nread_digital() value from pin20. The reading will be either 0 (lo) or 1 (hi)."),
     _("microbit.pin20.write_digital(value) \nSet pin20 to output high if value is 1, or to low, it it is 0."),
-    # Additional Pins for calliope
+    # Additional Pins for Calliope mini
     _("microbit.pin21.read_digital() \nread_digital() value from pin21. The reading will be either 0 (lo) or 1 (hi)."),
     _("microbit.pin21.write_digital(value) \nSet pin21 to output high if value is 1, or to low, it it is 0."),
     _("microbit.pin22.read_digital() \nread_digital() value from pin22. The reading will be either 0 (lo) or 1 (hi)."),
@@ -294,8 +277,8 @@ MICROBIT_APIS = [
     _("microbit.spi.write_readinto(out, in) \nUse write_readinto(out, in) to write the 'out' buffer to the connected device\nand read any response into the 'in' buffer. The length of the buffers should\nbe the same. The buffers can be the same object."),
     # Music module
     _("music.set_tempo(number, bpm) \nMake a beat last a 'number' of ticks long and\nplayed at 'bpm' beats per minute."),
-    _("music.pitch(freq, length=-1, pin=microbit.pin0, wait=True) \nMake micro:bit play a note at 'freq' frequency for\n'length' milliseconds. E.g. pitch(440, 1000) will play concert 'A' for 1 second.\nIf length is a negative number the pitch is played continuously.\nUse the optional pin argument to override the default output for the speaker.\nIf wait is False the music will play in the background while the program\ncontinues."),
-    _("music.play(music, pin=microbit.pin0, wait=True, loop=False) \nMake micro:bit play 'music' list of notes. Try out the built in music to see\nhow it works. E.g. music.play(music.PUNCHLINE).\nUse the optional pin argument to override the default output for the speaker.\nIf wait is False the music will play in the background while the program\ncontinues.\nIf loop is True, the tune will repeat."),
+    _("music.pitch(freq, length=-1, pin=microbit.pin0, wait=True) \nMake Calliope mini play a note at 'freq' frequency for\n'length' milliseconds. E.g. pitch(440, 1000) will play concert 'A' for 1 second.\nIf length is a negative number the pitch is played continuously.\nIf you want to use the Calliope mini speaker set pin28 and pin29 on (pin[number].write_digital(1)) \nand use the optional pin argument for pin30. \nIf wait is False the music will play in the background while the program\ncontinues."),
+    _("music.play(source, pin=microbit.pin0, wait=True, loop=False) \nMake Calliope mini play 'music'. Try out the built in music to see\nhow it works. E.g. music.play(music.PUNCHLINE).\nIf you wish to use the Calliope mini speaker set pin29 and pin28 on \n(pin[number].write_digital(1)) one line above and \nuse the optional argument for pin30. \nOtherwise it will asume that you attached a speaker on -(ground) and pin0 \nIf wait is False the music will play in the background while the program\ncontinues.\nIf loop is True, the tune will repeat."),
     _("music.get_tempo() \nReturn the number of ticks in a beat and number of beats per minute."),
     _("music.stop(pin=microbit.pin0) \nStops all music playback on the given pin. If no pin is given, pin0 is assumed."),
     _("music.reset()\nIf things go wrong, reset() the music to its default settings."),
@@ -342,9 +325,6 @@ MICROBIT_APIS = [
     _("radio.RATE_250KBIT"),
     _("radio.RATE_1MBIT"),
     _("radio.RATE_2MBIT"),
-    # Audio
-    _("audio.play(source, wait=True, pins=(pin0, pin1)) \nPlay the source to completion where 'source' is an iterable, each element of\nwhich must be an AudioFrame instance."),
-    _("audio.AudioFrame()() \nRepresents a list of 32 samples each of which is a signed byte. It takes just\nover 4ms to play a single frame."),
     # Speech
     _("speech.translate(words) \nReturn a string containing the phonemes for the English words in the string\n'words'."),
     _("speech.say(words, pitch=64, speed=72, mouth=128, throat=128) \nSay the English words in the string 'words'. Override the optional pitch,\nspeed, mouth and throat settings to change the tone of voice."),

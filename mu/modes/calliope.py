@@ -26,7 +26,7 @@ import semver
 from tokenize import TokenError
 from mu.logic import HOME_DIRECTORY
 from mu.contrib import mflash, microfs
-from mu.modes.api import MICROBIT_APIS, SHARED_APIS
+from mu.modes.api import CALLIOPEMINI_APIS, SHARED_APIS
 from mu.modes.base import MicroPythonMode
 from mu.interface.panes import CHARTS
 from PyQt5.QtCore import QObject, QThread, pyqtSignal, QTimer
@@ -224,7 +224,7 @@ class CalliopeMode(MicroPythonMode):
         Return a list of API specifications to be used by auto-suggest and call
         tips.
         """
-        return SHARED_APIS + MICROBIT_APIS
+        return SHARED_APIS + CALLIOPEMINI_APIS
 
     def flash(self):
         """
