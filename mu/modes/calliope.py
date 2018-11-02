@@ -25,8 +25,8 @@ import logging
 import semver
 from tokenize import TokenError
 from mu.logic import HOME_DIRECTORY
-from mu.contrib import mflash, microfs
-from mu.modes.api import CALLIOPEMINI_APIS, SHARED_APIS
+from mu.contrib import mflash, minifs
+from mu.modes.api import MICROBIT_APIS, SHARED_APIS
 from mu.modes.base import MicroPythonMode
 from mu.interface.panes import CHARTS
 from PyQt5.QtCore import QObject, QThread, pyqtSignal, QTimer
@@ -117,7 +117,7 @@ class FileManager(QObject):
         or emit a failure signal.
         """
         try:
-            result = tuple(microfs.ls())
+            result = tuple(minifs.ls())
             self.on_list_files.emit(result)
         except Exception as ex:
             logger.exception(ex)
@@ -130,7 +130,7 @@ class FileManager(QObject):
         failure signal.
         """
         try:
-            microfs.get(microbit_filename, local_filename)
+            minifs.get(microbit_filename, local_filename)
             self.on_get_file.emit(microbit_filename)
         except Exception as ex:
             logger.error(ex)
@@ -143,7 +143,7 @@ class FileManager(QObject):
         a failure signal.
         """
         try:
-            microfs.put(local_filename, target=None)
+            minifs.put(local_filename, target=None)
             self.on_put_file.emit(os.path.basename(local_filename))
         except Exception as ex:
             logger.error(ex)
@@ -155,7 +155,7 @@ class FileManager(QObject):
         of the file when complete, or emit a failure signal.
         """
         try:
-            microfs.rm(microbit_filename)
+            minifs.rm(microbit_filename)
             self.on_delete_file.emit(microbit_filename)
         except Exception as ex:
             logger.error(ex)
@@ -224,7 +224,7 @@ class CalliopeMode(MicroPythonMode):
         Return a list of API specifications to be used by auto-suggest and call
         tips.
         """
-        return SHARED_APIS + CALLIOPEMINI_APIS
+        return SHARED_APIS + MICROBIT_APIS
 
     def flash(self):
         """
@@ -334,7 +334,7 @@ class CalliopeMode(MicroPythonMode):
 
             # Get the version of MicroPython on the device.
             try:
-                version_info = microfs.version()
+                version_info = minifs.version()
                 logger.info(version_info)
                 board_info = version_info['version'].split()
                 if (board_info[0] == 'mini' and
@@ -530,12 +530,12 @@ class CalliopeMode(MicroPythonMode):
                 script = script[64:]
             commands.append('fd.close()')
             logger.info(commands)
-            serial = microfs.get_serial()
-            out, err = microfs.execute(commands, serial)
+            serial = minifs.get_serial()
+            out, err = minifs.execute(commands, serial)
             logger.info((out, err))
             if err:
                 self.view.show_message("",err)
-                raise IOError(microfs.clean_error(err))
+                raise IOError(minifs.clean_error(err))
             # Reset the device.
             serial.write(b'import microbit\r\n')
             serial.write(b'microbit.reset()\r\n')
