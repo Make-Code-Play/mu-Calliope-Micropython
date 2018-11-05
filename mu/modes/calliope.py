@@ -312,7 +312,7 @@ class CalliopeMode(MicroPythonMode):
         user_defined_microbit_path = path_to_mini
         if path_to_mini is None:
             # Ask the user to locate the device.
-            path_to_mini = self.view.get_microbit_path(HOME_DIRECTORY)
+            path_to_mini = self.view.get_calliopemini_path(HOME_DIRECTORY)
             user_defined_microbit_path = path_to_mini
             logger.debug('User defined path to mini: {}'.format(
                          user_defined_microbit_path))
