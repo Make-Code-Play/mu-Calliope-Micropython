@@ -547,6 +547,7 @@ class Editor:
         self.envars = []  # See restore session and show_admin
         self.minify = False
         self.microbit_runtime = ''
+        self.mini_runtime = ''
         self.connected_devices = set()
         self.find = ''
         self.replace = ''
@@ -658,6 +659,16 @@ class Editor:
                                     '{}'.format(self.microbit_runtime))
                         if not os.path.isfile(self.microbit_runtime):
                             self.microbit_runtime = ''
+                            logger.warning('The specified micro:bit runtime '
+                                           'does not exist. Using default '
+                                           'runtime instead.')
+                if 'mini_runtime' in old_session:
+                    self.mini_runtime = old_session['mini_runtime']
+                    if self.mini_runtime:
+                        logger.info('Custom Calliope mini runtime path: '
+                                    '{}'.format(self.mini_runtime))
+                        if not os.path.isfile(self.mini_runtime):
+                            self.mini_runtime = ''
                             logger.warning('The specified micro:bit runtime '
                                            'does not exist. Using default '
                                            'runtime instead.')
@@ -1020,6 +1031,7 @@ class Editor:
             'envars': self.envars,
             'minify': self.minify,
             'microbit_runtime': self.microbit_runtime,
+            'mini_runtime': self.mini_runtime,
         }
         session_path = get_session_path()
         with open(session_path, 'w') as out:
@@ -1042,6 +1054,7 @@ class Editor:
             'envars': envars,
             'minify': self.minify,
             'microbit_runtime': self.microbit_runtime,
+            'mini_runtime': self.mini_runtime,
         }
         with open(LOG_FILE, 'r', encoding='utf8') as logfile:
             new_settings = self._view.show_admin(logfile.read(), settings)
@@ -1057,6 +1070,17 @@ class Editor:
                 self._view.show_message(message, information)
             else:
                 self.microbit_runtime = runtime
+
+            runtime = new_settings['mini_runtime'].strip()
+            if runtime and not os.path.isfile(runtime):
+                self.mini_runtime = ''
+                message = _('Could not find MicroPython runtime.')
+                information = _("The Calliope mini runtime you specified ('{}') "
+                                "does not exist. "
+                                "Please try again.").format(runtime)
+                self._view.show_message(message, information)
+            else:
+                self.mini_runtime = runtime
 
     def select_mode(self, event=None):
         """

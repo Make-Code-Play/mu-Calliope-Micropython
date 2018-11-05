@@ -370,7 +370,7 @@ class CalliopeMode(MicroPythonMode):
                 logger.warn('Could not detect version of MicroPython.')
                 force_flash = True
             # Check use of custom runtime.
-            rt_hex_path = self.editor.microbit_runtime.strip()
+            rt_hex_path = self.editor.mini_runtime.strip()
             # rt_hex_path = "mini_runtime.hex"
             # rt_hex_path = os.path.dirname(os.path.realpath(__file__))+"/mini_runtime.hex"
             # self.view.show_message("hex path used", rt_hex_path)
@@ -379,12 +379,12 @@ class CalliopeMode(MicroPythonMode):
 
             if (rt_hex_path and os.path.exists(rt_hex_path)):
                 message = message + _(" Runtime: {}").format(rt_hex_path)
-                # self.view.show_message("hex path used", rt_hex_path)
+                #self.view.show_message("hex path used", rt_hex_path)
                 force_flash = True  # Using a custom runtime, so flash it.
             else:
                 # self.view.show_message("hex path not used", rt_hex_path)
                 rt_hex_path = None
-                self.editor.microbit_runtime = ''
+                self.editor.mini_runtime = ''
             # Check for use of user defined path (to save hex onto local
             # file system.
             if user_defined_microbit_path:
