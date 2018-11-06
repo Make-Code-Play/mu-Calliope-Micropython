@@ -73,25 +73,31 @@ def raw_on(serial):
         serial.read(n)
         n = serial.inWaiting()
     # Go into raw mode with CTRL-A.
-    serial.write(b'\r\x01')
-    # Flush
-    data = serial.read_until(b'raw REPL; CTRL-B to exit\r\n>')
-    if not data.endswith(b'raw REPL; CTRL-B to exit\r\n>'):
-        if COMMAND_LINE_FLAG:
-            print(data)
-        raise IOError('Could not enter raw REPL.')
+    data = ""
+    while True:
+        serial.write(b'\r\x01')
+        # Flush
+        time.sleep(0.1)
+        data = str(serial.readall())
+        if data.find("raw REPL; CTRL-B to exit") > -1:
+            break
+    
+    # if not data.endswith(b'raw REPL; CTRL-B to exit\r\n>'):
+    #     if COMMAND_LINE_FLAG:
+    #         print(data)
+    #     raise IOError('Could not enter raw REPL.1')
     # Soft Reset with CTRL-D
     serial.write(b'\x04')
     data = serial.read_until(b'soft reboot\r\n')
     if not data.endswith(b'soft reboot\r\n'):
         if COMMAND_LINE_FLAG:
             print(data)
-        raise IOError('Could not enter raw REPL.')
+        raise IOError('Could not enter raw REPL.2')
     data = serial.read_until(b'raw REPL; CTRL-B to exit\r\n>')
     if not data.endswith(b'raw REPL; CTRL-B to exit\r\n>'):
         if COMMAND_LINE_FLAG:
             print(data)
-        raise IOError('Could not enter raw REPL.')
+        raise IOError('Could not enter raw REPL.3')
 
 
 def raw_off(serial):
