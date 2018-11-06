@@ -1171,7 +1171,7 @@ class Editor:
         import ctypes
         from subprocess import check_output
 
-        def find_mini():
+        def find_device():
             """
             Returns a path on the filesystem that represents the plugged in BBC
             micro:bit that is to be flashed. If no micro:bit is found, it returns
@@ -1187,7 +1187,7 @@ class Editor:
                 mount_output = check_output('mount').splitlines()
                 mounted_volumes = [x.split()[2] for x in mount_output]
                 for volume in mounted_volumes:
-                    if volume.endswith(b'MINI'):
+                    if volume.endswith(b'MINI') or volume.endswith(b'MICROBIT'):
                         return volume.decode('utf-8')  # Return a string not bytes.
             elif os.name == 'nt':
                 # 'nt' means we're on Windows.
@@ -1222,8 +1222,8 @@ class Editor:
                         if ctypes.windll.kernel32.GetDriveTypeW(path) != 2:
                             continue
                         if os.path.exists(path) and \
-                                get_volume_name(path) == 'MINI':
-                            return path
+                                get_volume_name(path) == 'MINI' or get_volume_name(path) == 'MICROBIT':
+                            return get_volume_name(path)
                 finally:
                     ctypes.windll.kernel32.SetErrorMode(old_mode)
             else:
@@ -1257,9 +1257,11 @@ class Editor:
 
         for device in devices:
             mode_name = device[0]
-            if mode_name == "microbit":
-                time.sleep(2) # wait for device
-            if find_mini() is not None: # differenciate if device is Calliope mini or microbit
+
+            while find_device() is None: # differenciate if device is Calliope mini or microbit
+                pass
+            d = find_device().lower()
+            if d.find("mini"):
                 mode_name = "calliope"
             if device not in self.connected_devices:
                 self.connected_devices.add(device)
